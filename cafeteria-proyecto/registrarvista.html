@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>CoffeeBooks</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="estilos0.css">
+    <link rel="stylesheet" href="/cafeteria-proyecto/css/notificacion.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/templatemo-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <body>
+      <!-- Preloader -->
+      <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+      </div>
+      <!--end preloader-->
+      <div class="tm-top-header">
+        <div class="container">
+          <div class="row">
+            <div class="tm-top-header-inner">
+              <div class="tm-logo-container">
+                <img src="img/logo.png" alt="Logo" class="tm-site-logo" />
+                <h1 class="tm-site-name tm-handwriting-font">CoffeeBooks</h1>
+              </div>
+              <div class="mobile-menu-icon">
+                <i class="fa fa-bars"></i>
+              </div>
+              <nav class="tm-nav">
+                <ul>
+                  <li><a href="index.html">INICIO</a></li>
+                  <li><a href="registrarvista.html">Registrate</a></li>
+                  <li><a href="today-special.html">Especial de Hoy</a></li>
+                  <li><a href="menu.html">Menú</a></li>
+                  <li><a href="cafe-blog.html">Blog de Café</a></li>
+                  <li><a href="contact.html">Contacto</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </head>
+    <body>
+      <form class="formulario" action="login_registrar.php" method="POST">
+
+        <h1>Registrate</h1>
+        <div class="contenedor">
+
+          <div class="input-contenedor">
+            <i class="fas fa-user icon"></i>
+            <input type="text" placeholder="Nombre Completo"
+              name="nombreCompleto" required>
+
+          </div>
+
+          <div class="input-contenedor">
+            <i class="fas fa-envelope icon"></i>
+            <input type="text" placeholder="Correo Electronico" name="correo"
+              required>
+
+          </div>
+
+          <div class="input-contenedor">
+            <i class="fas fa-key icon"></i>
+            <input type="password" placeholder="Contraseña" name="contraseña"
+              required>
+
+          </div>
+          <input type="submit" value="Registrate" class="button"
+            name="btnregistrar">
+          <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de
+            privacidad.</p>
+          <p>¿Ya tienes una cuenta?<a class="link" href="loginvista.html">
+              Iniciar Sesion</a></p>
+        </div>
+      </form>
+      <!-- JS -->
+      <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+      <script src="/cafeteria-proyecto/js/notificacion.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="js/templatemo-script.js"></script>
+    </body>
+  </html>

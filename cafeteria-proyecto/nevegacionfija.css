@@ -1,0 +1,65 @@
+.nav-visible {
+    display: block; /* Mostrar la barra de navegación cuando se hace scroll */
+    position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      z-index: 100; 
+  }
+
+  #scrollToTopBtn {
+    position: fixed;
+    right: 20px; /* Ajusta el valor para posicionar el botón a tu gusto */
+    top: 95%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    display: none; /* Ocultar el botón inicialmente */
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  #scrollToTopBtn:hover {
+    background-color: #555;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .boton-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #25D366;
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+  }
+  
+  .boton-flotante:hover {
+    background-color: #128C7E;
+  }

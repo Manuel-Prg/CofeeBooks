@@ -1,0 +1,51 @@
+.cafe-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 300px;
+    background: linear-gradient(to right, #f3e7d3, #e6d0b1);
+    border-left: 4px solid #8B4513;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  
+  .cafe-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .cafe-notification-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cafe-notification-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .cafe-notification-message {
+    color: #5D4037;
+    font-size: 14px;
+  }
+  
+  .cafe-notification-progress {
+    width: 100%;
+    height: 3px;
+    background-color: #D7CCC8;
+    margin-top: 10px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .cafe-notification-progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #8B4513;
+    transition: width 5s linear;
+  }
