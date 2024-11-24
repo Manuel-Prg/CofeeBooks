@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>CoffeeBooks - Registro</title>
-    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" href="estilos0.css">
+    <link rel="stylesheet" href="./css/estilos0.css">
     <link rel="stylesheet" href="/cafeteria-proyecto/css/notificacion.css">
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
+        type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
@@ -24,10 +27,19 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             animation: slideIn 0.5s ease-out;
         }
+
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .input-contenedor {
             margin-bottom: 15px;
             border: 1px solid #aaa;
@@ -36,6 +48,7 @@
             align-items: center;
             padding: 5px 10px;
         }
+
         .icon {
             min-width: 35px;
             text-align: center;
@@ -45,6 +58,7 @@
             align-items: center;
             justify-content: center;
         }
+
         input[type="text"],
         input[type="password"],
         input[type="email"] {
@@ -55,6 +69,7 @@
             outline: none;
             background: transparent;
         }
+
         #mensaje {
             margin-top: 20px;
             padding: 10px;
@@ -63,6 +78,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Preloader -->
     <div id="loader-wrapper">
@@ -125,4 +141,5 @@
         document.addEventListener('DOMContentLoaded', inicializarRegistro);
     </script>
 </body>
+
 </html>
