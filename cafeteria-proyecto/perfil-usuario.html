@@ -12,8 +12,8 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
     <style>
         body {
             background: url('img/coffee-bg.jpg') no-repeat center center fixed;
@@ -140,7 +140,7 @@
     <div class="user-profile">
         <div class="user-info">
             <div class="user-avatar">
-                <img src="/placeholder.svg?height=100&width=100" alt="Avatar del usuario" id="userAvatar">
+                <img src="/cafeteria-proyecto/img/usuario-icon.png" alt="Avatar del usuario" id="userAvatar">
             </div>
             <div class="user-details">
                 <h2 id="userName">Cargando...</h2>
@@ -172,69 +172,38 @@
     <script src="/cafeteria-proyecto/js/notificacion.js"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>
-    <!-- Supabase -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script type="module">
-        import supabase from './js/supabase-client/supabaseClient.js';
-    
-        async function getUserStats(userId) {
-            const { data, error } = await supabase
-                .from('user_stats')
-                .select('coffee_count, book_count, reward_points')
-                .eq('user_id', userId)
-                .single();
-    
-            if (error) {
-                console.error('Error al obtener estadísticas del usuario:', error);
-                return null;
-            }
-    
-            return data;
-        }
-    
-        async function loadUserProfile() {
-            const { data: { user }, error } = await supabase.auth.getUser();
-            if (error) {
-                console.error('Error al obtener el usuario:', error);
-                document.getElementById('mensaje').innerHTML = 'Error al cargar el perfil. Por favor, inicia sesión nuevamente.';
-                return;
-            }
-    
+    <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
+            authDomain: "cofeebooks-224bb.firebaseapp.com",
+            projectId: "cofeebooks-224bb",
+            storageBucket: "cofeebooks-224bb.firebasestorage.app",
+            messagingSenderId: "13027139989",
+            appId: "1:13027139989:web:4f6eafc2a8e6b2bfbfd69c",
+            measurementId: "G-KDP62TBVC6"
+        };
+
+        // Inicializar Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Cargar perfil del usuario
+        auth.onAuthStateChanged((user) => {
             if (user) {
-                document.getElementById('userName').textContent = user.user_metadata.full_name || 'Usuario CoffeeBooks';
-                document.getElementById('userEmail').textContent = user.email;
-                document.getElementById('userJoinDate').textContent = new Date(user.created_at).toLocaleDateString();
-    
-                // Cargar estadísticas del usuario
-                const userStats = await getUserStats(user.id);
-                if (userStats) {
-                    document.getElementById('coffeeCount').textContent = userStats.coffee_count || '0';
-                    document.getElementById('bookCount').textContent = userStats.book_count || '0';
-                    document.getElementById('rewardPoints').textContent = userStats.reward_points || '0';
-                } else {
-                    document.getElementById('coffeeCount').textContent = '0';
-                    document.getElementById('bookCount').textContent = '0';
-                    document.getElementById('rewardPoints').textContent = '0';
-                }
+                // Asegurarse de que la información esté cargada correctamente
+                document.getElementById('userName').innerText = user.displayName || 'Sin Nombre';
+                document.getElementById('userEmail').innerText = user.email;
+                document.getElementById('userJoinDate').innerText = new Date(user.metadata.creationTime).toLocaleDateString();
             } else {
-                window.location.href = 'loginvista.html';
-            }
-        }
-    
-        document.getElementById('logoutButton').addEventListener('click', async function() {
-            const { error } = await supabase.auth.signOut();
-            if (error) {
-                console.error('Error al cerrar sesión:', error);
-                document.getElementById('mensaje').innerHTML = 'Error al cerrar sesión. Por favor, intenta nuevamente.';
-            } else {
-                window.location.href = 'loginvista.html';
+                window.location.href = '/cafeteria-proyecto/loginvista.html';
             }
         });
-    
-        window.addEventListener('load', function() {
-            var loader = document.getElementById('loader-wrapper');
-            loader.style.display = 'none';
-            loadUserProfile();
+
+        // Cerrar sesión
+        document.getElementById('logoutButton').addEventListener('click', async function() {
+            await auth.signOut();
+            window.location.href = '/cafeteria-proyecto/loginvista.html';
         });
     </script>
 </body>

@@ -1,196 +1,206 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>CoffeeBooks - Registro</title>
+    <title>CoffeeBooks - Registrarse</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="./css/estilos0.css">
-    <link rel="stylesheet" href="./css/notificacion.css">
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./css/font-awesome.min.css" rel="stylesheet" />
-    <link href="./css/templatemo-style.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/cafeteria-proyecto/css/notificacion.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/templatemo-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
-    <style>
-        .formulario {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .input-contenedor {
-            margin-bottom: 15px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            padding: 5px 10px;
-        }
-
-        .icon {
-            min-width: 35px;
-            text-align: center;
-            color: #999;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
-            font-size: 18px;
-            width: 100%;
-            padding: 10px;
-            border: none;
-            outline: none;
-            background: transparent;
-        }
-
-        #mensaje {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Preloader -->
-    <div id="loader-wrapper">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-    <!--end preloader-->
-    <div class="tm-top-header">
-        <div class="container">
-            <div class="row">
-                <div class="tm-top-header-inner">
-                    <div class="tm-logo-container">
-                        <img src="img/logo.png" alt="Logo" class="tm-site-logo" />
-                        <h1 class="tm-site-name tm-handwriting-font">CoffeeBooks</h1>
-                    </div>
-                    <div class="mobile-menu-icon">
-                        <i class="fa fa-bars"></i>
-                    </div>
-                    <nav class="tm-nav">
-                        <ul>
-                            <li><a href="index.html">INICIO</a></li>
-                            <li><a href="registrarvista.html">Registrate</a></li>
-                            <li><a href="today-special.html">Especial de Hoy</a></li>
-                            <li><a href="menu.html">Menú</a></li>
-                            <li><a href="cafe-blog.html">Blog de Café</a></li>
-                            <li><a href="contact.html">Contacto</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <form id="registerForm" class="formulario">
-        <h1>Regístrate</h1>
-        <div class="contenedor">
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input type="text" id="fullName" placeholder="Nombre Completo" required>
-            </div>
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" id="email" placeholder="Correo Electrónico" required>
-            </div>
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <input type="password" id="password" placeholder="Contraseña" required>
-            </div>
-            <input type="submit" value="Registrarse" class="button">
-            <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-            <p>¿Ya tienes una cuenta? <a class="link" href="loginvista.html">Iniciar Sesión</a></p>
-        </div>
-    </form>
-    <div id="mensaje"></div>
-
-    <!-- JS -->
-    <script src="./js/jquery-1.11.2.min.js"></script>
-    <script src="./js/notificacion.js"></script>
-    <script src="./js/templatemo-script.js"></script>
-    
-    <!-- Supabase -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="module">
-        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+        // Importar las funciones necesarias desde Firebase SDK
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js';
 
-        const supabaseUrl = 'https://tdxceutynbqfjevvhoeu.supabase.co'
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkeGNldXR5bmJxZmpldnZob2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI3NTcyMzUsImV4cCI6MjA0ODMzMzIzNX0.DTV7g_1nU_5xRTmm_WguOgQkCBuK9fPsXraW1WVJ7jk'
-        const supabase = createClient(supabaseUrl, supabaseKey)
+        // Configuración de Firebase (obtén estos valores desde tu consola de Firebase)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
+            authDomain: "cofeebooks-224bb.firebaseapp.com",
+            projectId: "cofeebooks-224bb",
+            storageBucket: "cofeebooks-224bb.firebasestorage.app",
+            messagingSenderId: "13027139989",
+            appId: "1:13027139989:web:4f6eafc2a8e6b2bfbfd69c",
+            measurementId: "G-KDP62TBVC6"
+        };
 
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Función para registrar usuario
         async function registrarUsuario(email, password, fullName) {
             try {
-                const { data, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: password,
-                    options: {
-                        data: {
-                            full_name: fullName,
-                        },
-                        emailRedirectTo: 'http://127.0.0.1:3000/cafeteria-proyecto/confirmar-email.html'
-                    }
+                // Crear usuario con correo y contraseña
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Guardar el nombre completo en el perfil del usuario
+                await updateProfile(user, {
+                    displayName: fullName
                 });
 
-                if (error) {
-                    document.getElementById('mensaje').innerHTML = 'Error: ' + error.message;
-                } else {
-                    document.getElementById('mensaje').innerHTML = '¡Registro exitoso! Por favor, verifica tu email.';
-                    // Redirigir a la página de confirmación de correo
-                    setTimeout(() => {
-                        window.location.href = 'http://127.0.0.1:3000/cafeteria-proyecto/confirmar-email.html';
-                    }, 3000); // Espera 3 segundos antes de redirigir
-                }
+                // Mostrar mensaje de éxito y redirigir
+                document.getElementById('mensaje').innerText = '¡Registro exitoso!';
+                setTimeout(() => {
+                    window.location.href = '/cafeteria-proyecto/perfil-usuario.html'; // Redirigir al perfil
+                }, 2000);
             } catch (error) {
-                console.error('Error durante el registro:', error);
-                document.getElementById('mensaje').innerHTML = 'Error durante el registro. Por favor, intenta de nuevo.';
+                // Manejo de errores
+                document.getElementById('mensaje').innerText = 'Error: ' + error.message;
             }
         }
 
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        // Evento de envío del formulario de registro
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
+            // Obtener datos del formulario
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            await registrarUsuario(email, password, fullName);
-        });
-
-        // Verificar si el usuario ya está autenticado
-        window.addEventListener('load', async function() {
-            var loader = document.getElementById('loader-wrapper');
-            loader.style.display = 'none';
-
-            const { data: { user }, error } = await supabase.auth.getUser();
-            if (user) {
-                // Si el usuario ya está autenticado, redirigir al perfil
-                window.location.href = '/cafeteria-proyecto/perfil-usuario.html';
-            }
+            // Llamar a la función para registrar al usuario
+            registrarUsuario(email, password, fullName);
         });
     </script>
+
+    <style>
+        body {
+            background: url('img/coffee-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .register-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 80px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Damion', cursive;
+            font-size: 36px;
+            color: #5D4037;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #C7A17A;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #A1887F;
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: #5D4037;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #C7A17A;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+     <!-- Preloader -->
+     <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+      </div>
+      <!-- End Preloader -->
+      <header id="navbar">
+        <div class="tm-top-header">
+          <div class="container">
+            <div class="row">
+              <div class="tm-top-header-inner">
+                <div class="tm-logo-container">
+                  <img src="img/logo.png" alt="Logo" class="tm-site-logo" />
+                  <h1 class="tm-site-name tm-handwriting-font">CoffeBooks</h1>
+                </div>
+                <div class="mobile-menu-icon">
+                  <i class="fa fa-bars"></i>
+                </div>
+                <nav class="tm-nav">
+                  <ul>
+                    <li><a href="index.html" class="active">INICIO&nbsp;</a></li>
+                    <li><a href="registrarvista.html">Registrate </a></li>
+                    <li><a href="today-special.html">Especial de Hoy</a></li>
+                    <li><a href="menu.html">Menú</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                    <li><a href="cafe-blog.html">Blog de Café</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+    <div class="register-container">
+        <h1>Registro</h1>
+        <form id="registerForm">
+            <input type="text" id="fullName" placeholder="Nombre Completo" required>
+            <input type="email" id="email" placeholder="Correo Electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+        <div id="mensaje"></div>
+        <div class="footer">
+            <p>¿Ya tienes cuenta? <a href="loginvista.html">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+    <script type="text/javascript" src="./js/navegacionfija.js"></script>
 </body>
 </html>
