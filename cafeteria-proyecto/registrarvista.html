@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>CoffeeBooks - Registro</title>
-    <meta name="viewport"
-        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="./css/estilos0.css">
-    <link rel="stylesheet" href="/cafeteria-proyecto/css/notificacion.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <link href="css/templatemo-style.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
-        type='text/css'>
+    <link rel="stylesheet" href="./css/notificacion.css">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./css/font-awesome.min.css" rel="stylesheet" />
+    <link href="./css/templatemo-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
     <style>
         .formulario {
@@ -130,10 +127,70 @@
         </div>
     </form>
     <div id="mensaje"></div>
-      <!-- JS -->
-      <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-      <script src="/cafeteria-proyecto/js/notificacion.js"></script>
-      <!-- jQuery -->
-      <script type="text/javascript" src="js/templatemo-script.js"></script>
+
+    <!-- JS -->
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script src="./js/notificacion.js"></script>
+    <script src="./js/templatemo-script.js"></script>
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+        const supabaseUrl = 'https://tdxceutynbqfjevvhoeu.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkeGNldXR5bmJxZmpldnZob2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI3NTcyMzUsImV4cCI6MjA0ODMzMzIzNX0.DTV7g_1nU_5xRTmm_WguOgQkCBuK9fPsXraW1WVJ7jk'
+        const supabase = createClient(supabaseUrl, supabaseKey)
+
+        async function registrarUsuario(email, password, fullName) {
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: fullName,
+                        },
+                        emailRedirectTo: 'http://127.0.0.1:3000/cafeteria-proyecto/confirmar-email.html'
+                    }
+                });
+
+                if (error) {
+                    document.getElementById('mensaje').innerHTML = 'Error: ' + error.message;
+                } else {
+                    document.getElementById('mensaje').innerHTML = '¡Registro exitoso! Por favor, verifica tu email.';
+                    // Redirigir a la página de confirmación de correo
+                    setTimeout(() => {
+                        window.location.href = 'http://127.0.0.1:3000/cafeteria-proyecto/confirmar-email.html';
+                    }, 3000); // Espera 3 segundos antes de redirigir
+                }
+            } catch (error) {
+                console.error('Error durante el registro:', error);
+                document.getElementById('mensaje').innerHTML = 'Error durante el registro. Por favor, intenta de nuevo.';
+            }
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            await registrarUsuario(email, password, fullName);
+        });
+
+        // Verificar si el usuario ya está autenticado
+        window.addEventListener('load', async function() {
+            var loader = document.getElementById('loader-wrapper');
+            loader.style.display = 'none';
+
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (user) {
+                // Si el usuario ya está autenticado, redirigir al perfil
+                window.location.href = '/cafeteria-proyecto/perfil-usuario.html';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeBooks - Confirmar Email</title>
+    <link rel="stylesheet" href="./css/estilos0.css">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./css/templatemo-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!--end preloader-->
+
+    <div class="tm-top-header">
+        <div class="container">
+            <div class="row">
+                <div class="tm-top-header-inner">
+                    <div class="tm-logo-container">
+                        <img src="img/logo.png" alt="Logo" class="tm-site-logo" />
+                        <h1 class="tm-site-name tm-handwriting-font">CoffeeBooks</h1>
+                    </div>
+                    <div class="mobile-menu-icon">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="tm-nav">
+                        <ul>
+                            <li><a href="index.html">INICIO</a></li>
+                            <li><a href="registrarvista.html">Registrate</a></li>
+                            <li><a href="today-special.html">Especial de Hoy</a></li>
+                            <li><a href="menu.html">Menú</a></li>
+                            <li><a href="cafe-blog.html">Blog de Café</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="tm-welcome-section">
+        <div class="container tm-position-relative">
+            <div class="tm-lights-container">
+                <img src="img/light.png" alt="Light" class="light light-1">
+                <img src="img/light.png" alt="Light" class="light light-2">
+                <img src="img/light.png" alt="Light" class="light light-3">  
+            </div>
+            <div class="row tm-welcome-content">
+                <h2 class="white-text tm-handwriting-font tm-welcome-header">
+                    <img src="img/header-line.png" alt="Line" class="tm-header-line">&nbsp;Confirmación de Email&nbsp;&nbsp;
+                    <img src="img/header-line.png" alt="Line" class="tm-header-line">
+                </h2>
+                <h2 class="gold-text tm-welcome-header-2">CoffeeBooks</h2>
+                <div id="mensaje" class="white-text tm-welcome-description">Verificando tu correo electrónico...</div>
+            </div>
+        </div>      
+    </section>
+
+    <!-- JS -->
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script src="./js/templatemo-script.js"></script>
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://tdxceutynbqfjevvhoeu.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkeGNldXR5bmJxZmpldnZob2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI3NTcyMzUsImV4cCI6MjA0ODMzMzIzNX0.DTV7g_1nU_5xRTmm_WguOgQkCBuK9fPsXraW1WVJ7jk'
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
+        window.addEventListener('load', async function() {
+            var loader = document.getElementById('loader-wrapper');
+            loader.style.display = 'none';
+
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const type = params.get('type');
+
+            if (token && type === 'signup') {
+                try {
+                    const { error } = await supabase.auth.verifyOtp({ token, type });
+                    if (error) {
+                        document.getElementById('mensaje').innerHTML = 'Error al confirmar el correo: ' + error.message;
+                    } else {
+                        document.getElementById('mensaje').innerHTML = '¡Correo confirmado con éxito!';
+                        // Redirigir al usuario a la página de inicio de sesión o al perfil
+                        setTimeout(() => {
+                            window.location.href = 'loginvista.html';
+                        }, 2000);
+                    }
+                } catch (error) {
+                    console.error('Error durante la confirmación:', error);
+                    document.getElementById('mensaje').innerHTML = 'Error durante la confirmación. Por favor, intenta de nuevo.';
+                }
+            } else {
+                document.getElementById('mensaje').innerHTML = 'No se encontró un token válido para la confirmación.';
+            }
+        });
+    </script>
+</body>
+</html>

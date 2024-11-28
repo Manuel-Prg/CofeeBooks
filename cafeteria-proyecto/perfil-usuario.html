@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>CoffeeBooks - Perfil de Usuario</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="./css/estilos0.css">
+    <link rel="stylesheet" href="/cafeteria-proyecto/css/notificacion.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/templatemo-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            background: url('img/coffee-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .user-profile {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .user-details h2 {
+            color: #5D4037;
+            margin-bottom: 10px;
+            font-family: 'Damion', cursive;
+            font-size: 36px;
+        }
+        .user-details p {
+            font-size: 18px;
+            color: #795548;
+            margin-bottom: 5px;
+        }
+        .logout-button {
+            background-color: #C7A17A;
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .logout-button:hover {
+            background-color: #A1887F;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        #mensaje {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: #5D4037;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .user-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #E0E0E0;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #C7A17A;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #795548;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!--end preloader-->
+    <div class="tm-top-header">
+        <div class="container">
+            <div class="row">
+                <div class="tm-top-header-inner">
+                    <div class="tm-logo-container">
+                        <img src="img/logo.png" alt="Logo" class="tm-site-logo" />
+                        <h1 class="tm-site-name tm-handwriting-font">CoffeeBooks</h1>
+                    </div>
+                    <div class="mobile-menu-icon">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="tm-nav">
+                        <ul>
+                            <li><a href="index.html">INICIO</a></li>
+                            <li><a href="today-special.html">Especial de Hoy</a></li>
+                            <li><a href="menu.html">Menú</a></li>
+                            <li><a href="cafe-blog.html">Blog de Café</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-profile">
+        <div class="user-info">
+            <div class="user-avatar">
+                <img src="/placeholder.svg?height=100&width=100" alt="Avatar del usuario" id="userAvatar">
+            </div>
+            <div class="user-details">
+                <h2 id="userName">Cargando...</h2>
+                <p>Correo: <span id="userEmail">Cargando...</span></p>
+                <p>Miembro desde: <span id="userJoinDate">Cargando...</span></p>
+            </div>
+        </div>
+        <button id="logoutButton" class="logout-button">Cerrar Sesión</button>
+        <div class="user-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="coffeeCount">0</div>
+                <div class="stat-label">Cafés Comprados</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="bookCount">0</div>
+                <div class="stat-label">Libros Leídos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="rewardPoints">0</div>
+                <div class="stat-label">Puntos de Recompensa</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mensaje"></div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script src="/cafeteria-proyecto/js/notificacion.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script type="module">
+        import supabase from './js/supabase-client/supabaseClient.js';
+    
+        async function getUserStats(userId) {
+            const { data, error } = await supabase
+                .from('user_stats')
+                .select('coffee_count, book_count, reward_points')
+                .eq('user_id', userId)
+                .single();
+    
+            if (error) {
+                console.error('Error al obtener estadísticas del usuario:', error);
+                return null;
+            }
+    
+            return data;
+        }
+    
+        async function loadUserProfile() {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error('Error al obtener el usuario:', error);
+                document.getElementById('mensaje').innerHTML = 'Error al cargar el perfil. Por favor, inicia sesión nuevamente.';
+                return;
+            }
+    
+            if (user) {
+                document.getElementById('userName').textContent = user.user_metadata.full_name || 'Usuario CoffeeBooks';
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('userJoinDate').textContent = new Date(user.created_at).toLocaleDateString();
+    
+                // Cargar estadísticas del usuario
+                const userStats = await getUserStats(user.id);
+                if (userStats) {
+                    document.getElementById('coffeeCount').textContent = userStats.coffee_count || '0';
+                    document.getElementById('bookCount').textContent = userStats.book_count || '0';
+                    document.getElementById('rewardPoints').textContent = userStats.reward_points || '0';
+                } else {
+                    document.getElementById('coffeeCount').textContent = '0';
+                    document.getElementById('bookCount').textContent = '0';
+                    document.getElementById('rewardPoints').textContent = '0';
+                }
+            } else {
+                window.location.href = 'loginvista.html';
+            }
+        }
+    
+        document.getElementById('logoutButton').addEventListener('click', async function() {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error al cerrar sesión:', error);
+                document.getElementById('mensaje').innerHTML = 'Error al cerrar sesión. Por favor, intenta nuevamente.';
+            } else {
+                window.location.href = 'loginvista.html';
+            }
+        });
+    
+        window.addEventListener('load', function() {
+            var loader = document.getElementById('loader-wrapper');
+            loader.style.display = 'none';
+            loadUserProfile();
+        });
+    </script>
+</body>
+</html>
