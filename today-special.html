@@ -39,13 +39,15 @@
             </div>
             <nav class="tm-nav">
               <ul>
-                <li><a href="index.html" class="active">INICIO&nbsp;</a></li>
-                <li><a href="registrarvista.html">Registrate </a></li>
+                <li><a href="index.html">INICIO</a></li>
+                <li id="registerMenuItem"><a href="registrarvista.html">Registrate</a></li>
+                <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a></li>
                 <li><a href="today-special.html">Especial de Hoy</a></li>
                 <li><a href="menu.html">Menú</a></li>
-                <li><a href="contact.html">Contacto</a></li>
                 <li><a href="cafe-blog.html">Blog de Café</a></li>
+                <li><a href="contact.html">Contacto</a></li>
               </ul>
+            </nav>
             </nav>
           </div>
         </div>
@@ -72,7 +74,7 @@
           bebidas calientes y refrescantes hasta comidas ligeras y contundentes,
           tenemos opciones para todos los gustos y preferencias. ¡Ven a probar nuestros especiales de hoy y disfruta de
           una experiencia única en nuestra cafeteria!&nbsp;</p>
-        <a href="./cafe-blog.html" class="tm-more-button tm-more-button-welcome">leé mas&nbsp;</a>
+        <a href="cafe-blog.html" class="tm-more-button tm-more-button-welcome">leé mas&nbsp;</a>
       </div>
       <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">
     </div>
@@ -96,7 +98,7 @@
               <hr class="tm-popular-item-hr">
               <p>Disfruta de un café americano espresso diluido.</p>
               <div class="order-now-container">
-                <a href="./menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
+                <a href="menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
               </div>
             </div>
           </div>
@@ -109,7 +111,7 @@
               <p> Disfruta de un café capuchino preparado con café expreso y
                 leche montada von vapor para darle una cremosidad inigualable.</p>
               <div class="order-now-container">
-                <a href="./menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
+                <a href="menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
               </div>
             </div>
           </div>
@@ -122,7 +124,7 @@
               <p>Disfruta de un café típico con leche pero con el sabor
                 indiscutible del chocolate.</p>
               <div class="order-now-container">
-                <a href="./menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
+                <a href="menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
               </div>
             </div>
           </div>
@@ -134,7 +136,7 @@
               <hr class="tm-popular-item-hr">
               <p>Disfruta de un café frio unico elaborado con café instantáneo molido, hielo y cream de leche.</p>
               <div class="order-now-container">
-                <a href="./menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
+                <a href="menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
               </div>
             </div>
           </div>
@@ -146,7 +148,7 @@
               <hr class="tm-popular-item-hr">
               <p>Disfruta de un café con leche con un sabor dulce y menos intenso.</p>
               <div class="order-now-container">
-                <a href="./menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
+                <a href="menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
               </div>
             </div>
           </div>
@@ -158,7 +160,7 @@
               <hr class="tm-popular-item-hr">
               <p>Disfruta de un café mucho más endulzada del cafe con leche.</p>
               <div class="order-now-container">
-                <a href="./menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
+                <a href="menu.html" class="order-now-link tm-handwriting-font">Ordena ahora</a>
               </div>
             </div>
           </div>
@@ -189,7 +191,7 @@
                 <li>Crepas</li>
                 <li>Té negro</li>
               </ol>
-              <a href="./menu.html" class="tm-more-button margin-top-30">leé mas&nbsp;</a>
+              <a href="menu.html" class="tm-more-button margin-top-30">leé mas&nbsp;</a>
             </div>
           </div>
         </div>
@@ -252,5 +254,10 @@
   <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script> <!-- jQuery -->
   <script type="text/javascript" src="js/templatemo-script.js"></script> <!-- Templatemo Script -->
   <script type="text/javascript" src="./js/navegacionfija.js"></script>
+  <!-- Google Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+  <!-- MENÚ DINAMICO-->
+  <script type="module" src="js/auth-menu.js"></script>
 </body>
 </html>

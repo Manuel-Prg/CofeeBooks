@@ -19,6 +19,7 @@
         // Importar las funciones necesarias desde Firebase SDK
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js';
+        import { updateMenuItems } from './js/auth-menu.js';
 
         // Configuración de Firebase (obtén estos valores desde tu consola de Firebase)
         const firebaseConfig = {
@@ -46,6 +47,9 @@
                 await updateProfile(user, {
                     displayName: fullName
                 });
+
+                // Actualizar los elementos del menú
+                updateMenuItems(user);
 
                 // Mostrar mensaje de éxito y redirigir
                 document.getElementById('mensaje').innerText = '¡Registro exitoso!';
@@ -202,5 +206,7 @@
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/templatemo-script.js"></script>
     <script type="text/javascript" src="./js/navegacionfija.js"></script>
+    <!-- Google Firebase App (the core Firebase SDK) is always required and must be listed first   -->
+    <script type="module" src="js/auth-menu.js"></script>
 </body>
 </html>

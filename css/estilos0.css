@@ -1,7 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-   background: url(/cafeteria-proyecto/img/fondo-login.jpg);
+   background: url(/img/fondo-login.jpg);
     background-size: cover;
     background-attachment: fixed;
 }

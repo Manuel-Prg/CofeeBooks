@@ -36,10 +36,12 @@
             </div>
             <nav class="tm-nav">
               <ul>
-                <li><a href="index.html" class="active">INICIO&nbsp;</a></li>
-                <li><a href="registrarvista.html">Registrate </a></li>
+                <li><a href="index.html">INICIO</a></li>
+                <li id="registerMenuItem"><a href="registrarvista.html">Registrate</a></li>
+                <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a></li>
                 <li><a href="today-special.html">Especial de Hoy</a></li>
                 <li><a href="menu.html">Menú</a></li>
+                <li><a href="cafe-blog.html">Blog de Café</a></li>
                 <li><a href="contact.html">Contacto</a></li>
               </ul>
             </nav>
@@ -71,7 +73,7 @@
           dirección. Estamos deseando escucharte y ayudarte
           en lo que necesites.
           ¡No dudes en ponerte en contacto con nosotros!</p>
-        <a href="#main" class="tm-more-button tm-more-button-welcome">Envianos un
+        <a href="cafe-blog.html" class="tm-more-button tm-more-button-welcome">Envianos un
           Mensaje</a>
       </div>
       <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">
@@ -211,5 +213,10 @@
       loadGoogleMap();
     });
   </script>
+    <!-- Google Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <!-- MENÚ DINAMICO-->
+    <script type="module" src="js/auth-menu.js"></script>
 </body>
 </html>

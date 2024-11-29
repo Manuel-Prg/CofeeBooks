@@ -12,8 +12,13 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+      
     <style>
         body {
             background: url('img/coffee-bg.jpg') no-repeat center center fixed;
@@ -140,7 +145,7 @@
     <div class="user-profile">
         <div class="user-info">
             <div class="user-avatar">
-                <img src="/cafeteria-proyecto/img/usuario-icon.png" alt="Avatar del usuario" id="userAvatar">
+                <img src="/img/usuario-icon.png" alt="Avatar del usuario" id="userAvatar">
             </div>
             <div class="user-details">
                 <h2 id="userName">Cargando...</h2>
@@ -169,42 +174,55 @@
 
     <!-- JS -->
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script src="/cafeteria-proyecto/js/notificacion.js"></script>
+    <script src="/js/notificacion.js"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>
-    <script>
+    <!-- firebase Script -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js';
+      
         // Configuración de Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
-            authDomain: "cofeebooks-224bb.firebaseapp.com",
-            projectId: "cofeebooks-224bb",
-            storageBucket: "cofeebooks-224bb.firebasestorage.app",
-            messagingSenderId: "13027139989",
-            appId: "1:13027139989:web:4f6eafc2a8e6b2bfbfd69c",
-            measurementId: "G-KDP62TBVC6"
+          apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
+          authDomain: "cofeebooks-224bb.firebaseapp.com",
+          projectId: "cofeebooks-224bb",
+          storageBucket: "cofeebooks-224bb.firebasestorage.app",
+          messagingSenderId: "13027139989",
+          appId: "1:13027139989:web:4f6eafc2a8e6b2bfbfd69c",
+          measurementId: "G-KDP62TBVC6"
         };
-
+      
         // Inicializar Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-        // Cargar perfil del usuario
-        auth.onAuthStateChanged((user) => {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+      
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener("DOMContentLoaded", function () {
+          onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Asegurarse de que la información esté cargada correctamente
-                document.getElementById('userName').innerText = user.displayName || 'Sin Nombre';
-                document.getElementById('userEmail').innerText = user.email;
-                document.getElementById('userJoinDate').innerText = new Date(user.metadata.creationTime).toLocaleDateString();
+              document.getElementById('userName').innerText = user.displayName || 'Sin Nombre';
+              document.getElementById('userEmail').innerText = user.email;
+              document.getElementById('userJoinDate').innerText = new Date(user.metadata.creationTime).toLocaleDateString();
             } else {
-                window.location.href = '/cafeteria-proyecto/loginvista.html';
+              window.location.href = 'loginvista.html';
             }
+          });
+      
+          const logoutButton = document.getElementById('logoutButton');
+          if (logoutButton) {
+            logoutButton.addEventListener('click', async function () {
+              await signOut(auth);
+              updateMenuitems(null);
+              window.location.href = 'loginvista.html';
+            });
+          }
         });
-
-        // Cerrar sesión
-        document.getElementById('logoutButton').addEventListener('click', async function() {
-            await auth.signOut();
-            window.location.href = '/cafeteria-proyecto/loginvista.html';
-        });
-    </script>
+      </script>
+    <!-- Google Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <!-- MENÚ DINAMICO-->
+    <script type="module" src="js/auth-menu.js"></script>
 </body>
 </html>
