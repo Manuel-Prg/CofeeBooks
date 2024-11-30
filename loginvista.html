@@ -1,81 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CoffeeBooks - Iniciar Sesión</title>
-    <meta name="viewport"
-        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" href="./css/estilos0.css">
-    <link rel="stylesheet" href="/css/notificacion.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Damion" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/templatemo-style.css" rel="stylesheet" />
+    <link href="./css/nevegacionfija.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
-        type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <style>
-        .formulario {
+        body {
+            background: url('img/fondo-login.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .login-container {
             background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease-out;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 80px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .input-contenedor {
-            margin-bottom: 15px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            padding: 5px 10px;
-        }
-
-        .icon {
-            min-width: 35px;
+        .login-container h2 {
+            font-family: 'Damion', cursive;
+            color: #C7A17A;
             text-align: center;
-            color: #999;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin-bottom: 30px;
         }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
-            font-size: 18px;
-            width: 100%;
-            padding: 10px;
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border-radius: 30px;
+            padding: 10px 15px;
+        }
+        .btn-login {
+            background-color: #C7A17A;
             border: none;
-            outline: none;
-            background: transparent;
+            border-radius: 30px;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
-
-        .user-section {
-            display: none;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin-top: 20px;
+        .btn-login:hover {
+            background-color: #A1887F;
         }
-
         #mensaje {
             margin-top: 20px;
             padding: 10px;
@@ -84,7 +62,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Preloader -->
     <div id="loader-wrapper">
@@ -92,7 +69,7 @@
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-    <!--end preloader-->
+    <!-- End Preloader -->
     <div class="tm-top-header">
         <div class="container">
             <div class="row">
@@ -108,8 +85,7 @@
                         <ul>
                             <li><a href="index.html">INICIO</a></li>
                             <li id="registerMenuItem"><a href="registrarvista.html">Registrate</a></li>
-                            <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a>
-                            </li>
+                            <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a></li>
                             <li><a href="today-special.html">Especial de Hoy</a></li>
                             <li><a href="menu.html">Menú</a></li>
                             <li><a href="cafe-blog.html">Blog de Café</a></li>
@@ -120,43 +96,69 @@
             </div>
         </div>
     </div>
-    <form id="loginForm" class="formulario">
-        <h1>Iniciar Sesión</h1>
-        <div class="contenedor">
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" id="email" placeholder="Correo Electrónico" required>
+
+    <div class="container" style="margin-bottom: 100px;">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="login-container">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                        </div>
+                        <button type="submit" class="btn btn-login">Iniciar Sesión</button>
+                    </form>
+                    <div id="mensaje"></div>
+                    <p class="text-center mt-3">¿No tienes una cuenta? <a href="registrarvista.html">Regístrate</a></p>
+                </div>
             </div>
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <input type="password" id="password" placeholder="Contraseña" required>
-            </div>
-            <input type="submit" value="Iniciar Sesión" class="button">
-            <p>Al iniciar sesión, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-            <p>¿No tienes una cuenta? <a class="link" href="registrarvista.html">Regístrate</a></p>
         </div>
-    </form>
-    <div id="userSection" class="user-section">
-        <h2>Bienvenido, <span id="userName"></span>!</h2>
-        <p>Email: <span id="userEmail"></span></p>
-        <button id="logoutButton" class="button">Cerrar Sesión</button>
     </div>
-    <div id="mensaje"></div>
-    <!-- JS -->
+
+    <footer>
+        <div class="tm-black-bg">
+            <div class="container">
+                <div class="row margin-bottom-60">
+                    <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
+                        <h3 class="tm-footer-div-title">Menú Principal</h3>
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="today-special.html">Especial de Hoy</a></li>
+                            <li><a href="menu.html">Menú</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
+                        </ul>
+                    </nav>
+                    <div class="col-lg-5 col-md-5 tm-footer-div">
+                        <h3 class="tm-footer-div-title">Sobre Nosotros</h3>
+                        <p class="margin-top-15">Somos una cafetería moderna y acogedora que ofrece una amplia variedad de bebidas y comidas deliciosas. Nuestro equipo está formado por profesionales apasionados por la cafetería y el servicio al cliente.</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 tm-footer-div">
+                        <h3 class="tm-footer-div-title">Redes Sociales</h3>
+                        <p>Síguenos en nuestras redes sociales para estar al tanto de futuras novedades.</p>
+                        <div class="tm-social-icons-container">
+                            <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="tm-social-icon"><i class="fa fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script src="/js/notificacion.js"></script>
-    <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>
-    <!-- Google Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
-
+    <script type="module" src="js/auth-menu.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js';
         import { updateMenuItems } from './js/auth-menu.js';
 
-        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
             authDomain: "cofeebooks-224bb.firebaseapp.com",
@@ -167,26 +169,19 @@
             measurementId: "G-KDP62TBVC6"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-
-                // Call updateMenuItems with the user who just logged in
                 updateMenuItems(user);
-
                 document.getElementById('mensaje').innerHTML = '¡Inicio de sesión exitoso!';
-
-                // Wait a bit before redirecting so the user can see the message
                 setTimeout(() => {
                     window.location.href = 'perfil-usuario.html';
                 }, 1000);
@@ -196,19 +191,16 @@
             }
         });
 
-        // Check if the user is already authenticated
         window.addEventListener('load', function () {
             var loader = document.getElementById('loader-wrapper');
             loader.style.display = 'none';
 
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    // If the user is already authenticated, redirect to the profile
                     window.location.href = 'perfil-usuario.html';
                 }
             });
         });
     </script>
 </body>
-
 </html>

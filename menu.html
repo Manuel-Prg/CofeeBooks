@@ -1,462 +1,417 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CoffeBooks - Menú de comidas y bebidas</title>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
-		type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/templatemo-style.css" rel="stylesheet">
-	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-	<link href="./css/nevegacionfija.css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CoffeBooks - Menú de comidas y bebidas</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link href="./css/nevegacionfija.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <style>
+        .container-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item figure {
+            margin: 0;
+            padding: 0;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .item figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .item:hover figure img {
+            transform: scale(1.1);
+        }
+
+        .info-product {
+            padding: 15px;
+        }
+
+        .info-product h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #c7a17a;
+            margin-bottom: 10px;
+        }
+
+        .tm-product-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .btn-add-cart {
+            background-color: #c7a17a;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #a1887f;
+        }
+
+        @media (max-width: 768px) {
+            .container-items {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-	<!-- Preloader -->
-	<div id="loader-wrapper">
-		<div id="loader"></div>
-		<div class="loader-section section-left"></div>
-		<div class="loader-section section-right"></div>
-	</div>
-	<!-- End Preloader -->
-	<div id="navbar">
-		<div class="tm-top-header">
-			<div class="container">
-				<div class="row">
-					<div class="tm-top-header-inner">
-						<div class="tm-logo-container">
-							<img src="img/logo.png" alt="Logo" class="tm-site-logo" />
-							<h1 class="tm-site-name tm-handwriting-font">CoffeBooks</h1>
-						</div>
-						<div class="mobile-menu-icon">
-							<i class="fa fa-bars"></i>
-						</div>
-						<nav class="tm-nav">
-							<ul>
-							  <li><a href="index.html">INICIO</a></li>
-							  <li id="registerMenuItem"><a href="registrarvista.html">Registrate</a></li>
-							  <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a></li>
-							  <li><a href="today-special.html">Especial de Hoy</a></li>
-							  <li><a href="menu.html">Menú</a></li>
-							  <li><a href="cafe-blog.html">Blog de Café</a></li>
-							  <li><a href="contact.html">Contacto</a></li>
-							</ul>
-						  </nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Preloader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Preloader -->
+    <div id="navbar">
+        <div class="tm-top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="tm-top-header-inner">
+                        <div class="tm-logo-container">
+                            <img src="img/logo.png" alt="Logo" class="tm-site-logo" />
+                            <h1 class="tm-site-name tm-handwriting-font">CoffeBooks</h1>
+                        </div>
+                        <div class="mobile-menu-icon">
+                            <i class="fa fa-bars"></i>
+                        </div>
+                        <nav class="tm-nav">
+                            <ul>
+                                <li><a href="index.html">INICIO</a></li>
+                                <li id="registerMenuItem"><a href="registrarvista.html">Registrate</a></li>
+                                <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a></li>
+                                <li><a href="today-special.html">Especial de Hoy</a></li>
+                                <li><a href="menu.html">Menú</a></li>
+                                <li><a href="cafe-blog.html">Blog de Café</a></li>
+                                <li><a href="contact.html">Contacto</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<button id="scrollToTopBtn" onclick="scrollToTop()">↑</button>
-	<section class="tm-welcome-section">
-		<div class="container tm-position-relative">
-			<div class="tm-lights-container">
-				<img src="img/light.png" alt="Light" class="light light-1">
-				<img src="img/light.png" alt="Light" class="light light-2">
-				<img src="img/light.png" alt="Light" class="light light-3">
-			</div>
-			<div class="row tm-welcome-content">
-				<h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line"
-						class="tm-header-line">&nbsp;Nuestros Menús&nbsp;&nbsp;<img src="img/header-line.png" alt="Line"
-						class="tm-header-line"></h2>
-				<h2 class="gold-text tm-welcome-header-2">CoffeBooks</h2>
-				<p class="gray-text tm-welcome-description">¡Bienvenido a nuestros menús!
-					En nuestra cafeteria,
-					ofrecemos una amplia variedad de bebidas y comidas deliciosas para
-					satisfacer todos los gustos.
-					Desde bebidas calientes y refrescantes hasta comidas ligeras y
-					contundentes, tenemos opciones para
-					todos los gustos y preferencias. Además, nuestro menú cambia regularmente
-					para ofrecerte siempre
-					opciones nuevas y emocionantes.
-					¡Echa un vistazo a nuestros menús y descubre todas las deliciosas opciones
-					que tenemos para
-					tí!&nbsp; &nbsp;&nbsp;</p>
-				<a href="cafe-blog.html" class="tm-more-button tm-more-button-welcome">Leé mas</a>
-			</div>
-			<img src="img/table-set.png" alt="Table Set" class="tm-table-set
-					img-responsive">
-		</div>
-	</section>
-	<div class="tm-main-section light-gray-bg">
-		<div class="container" id="main">
-			<section class="tm-section row">
-				<div class="col-lg-9 col-md-9 col-sm-8">
-					<h2 class="tm-section-header gold-text tm-handwriting-font">Variedad de
-						Menús</h2>
-					<h2>CoffeBooks</h2>
-					<p class="tm-welcome-description">"Haz tu pedido en línea y disfruta de
-						nuestros productos en la
-						comodidad de tu hogar."&nbsp;</p>
-					<a href="today-special.html" class="tm-more-button margin-top-30">Leé
-						mas&nbsp;</a>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 tm-welcome-img-container">
-					<div class="inline-block shadow-img">
-						<img src="img/1.jpg" alt="Image" class="img-circle img-thumbnail">
-					</div>
-				</div>
-			</section>
-			<section class="tm-section row">
-				<div class="col-lg-12 tm-section-header-container margin-bottom-30">
-					<h2 class="tm-section-header gold-text tm-handwriting-font">
-						<img src="img/logo.png" alt="Logo" class="tm-site-logo">Nuestros
-						Menús&nbsp;
-					</h2>
-				</div>
-				<div>
-					<link rel="stylesheet" href="./css/styles.css" />
-					</head>
+    <button id="scrollToTopBtn" onclick="scrollToTop()">↑</button>
+    <section class="tm-welcome-section">
+        <div class="container tm-position-relative">
+            <div class="tm-lights-container">
+                <img src="img/light.png" alt="Light" class="light light-1">
+                <img src="img/light.png" alt="Light" class="light light-2">
+                <img src="img/light.png" alt="Light" class="light light-3">
+            </div>
+            <div class="row tm-welcome-content">
+                <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line"
+                        class="tm-header-line">&nbsp;Nuestros Menús&nbsp;&nbsp;<img src="img/header-line.png" alt="Line"
+                        class="tm-header-line"></h2>
+                <h2 class="gold-text tm-welcome-header-2">CoffeBooks</h2>
+                <p class="gray-text tm-welcome-description">¡Bienvenido a nuestros menús!
+                    En nuestra cafeteria,
+                    ofrecemos una amplia variedad de bebidas y comidas deliciosas para
+                    satisfacer todos los gustos.
+                    Desde bebidas calientes y refrescantes hasta comidas ligeras y
+                    contundentes, tenemos opciones para
+                    todos los gustos y preferencias. Además, nuestro menú cambia regularmente
+                    para ofrecerte siempre
+                    opciones nuevas y emocionantes.
+                    ¡Echa un vistazo a nuestros menús y descubre todas las deliciosas opciones
+                    que tenemos para
+                    tí!&nbsp; &nbsp;&nbsp;</p>
+                <a href="cafe-blog.html" class="tm-more-button tm-more-button-welcome">Leé mas</a>
+            </div>
+            <img src="img/table-set.png" alt="Table Set" class="tm-table-set img-responsive">
+        </div>
+    </section>
+    <div class="tm-main-section light-gray-bg">
+        <div class="container" id="main">
+            <section class="tm-section row">
+                <div class="col-lg-9 col-md-9 col-sm-8">
+                    <h2 class="tm-section-header gold-text tm-handwriting-font">Variedad de
+                        Menús</h2>
+                    <h2>CoffeBooks</h2>
+                    <p class="tm-welcome-description">"Haz tu pedido en línea y disfruta de
+                        nuestros productos en la
+                        comodidad de tu hogar."&nbsp;</p>
+                    <a href="today-special.html" class="tm-more-button margin-top-30">Leé
+                        mas&nbsp;</a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 tm-welcome-img-container">
+                    <div class="inline-block shadow-img">
+                        <img src="img/1.jpg" alt="Image" class="img-circle img-thumbnail">
+                    </div>
+                </div>
+            </section>
+            <section class="tm-section row">
+                <div class="col-lg-12 tm-section-header-container margin-bottom-30">
+                    <h2 class="tm-section-header gold-text tm-handwriting-font">
+                        <img src="img/logo.png" alt="Logo" class="tm-site-logo">Nuestros Menús
+                    </h2>
+                </div>
+                <div class="container-items">
+                    <div class="item">
+                        <figure>
+                            <img src="https://gourmetdemexico.com.mx/wp-content/uploads/2019/04/affogato-cafe.jpg" alt="Café Affogato" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Affogato</h2>
+                            <p class="price">$30</p>
+                            <p class="tm-product-description">El café Affogato es una bebida tradicional italiana que consiste en una taza de café expreso servida con una bola de helado de vainilla flotando encima.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-					<body>
-						<header>
-							<div class="container-icon">
-								<div class="container-cart-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-										stroke-width="1.5" stroke="currentColor" class="icon-cart">
-										<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263
-											12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0
-											01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0
-											1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0
-											01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-									</svg>
-									<div class="count-products">
-										<span id="contador-productos">0</span>
-									</div>
-								</div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://w0.peakpx.com/wallpaper/76/679/HD-wallpaper-coffee-drinks-cup-drink-coffee-beans-cups.jpg" alt="Café Americano" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Americano</h2>
+                            <p class="price">$20</p>
+                            <p class="tm-product-description">El café americano es una bebida preparada a partir de café expreso diluido con agua caliente, reduce la cantidad de café y aumenta el volumen de la bebida.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-								<div class="container-cart-products hidden-cart">
-									<div class="row-product hidden">
-										<div class="cart-product">
-											<div class="info-cart-product">
-												<span class="cantidad-producto-carrito">1</span>
-												<p class="titulo-producto-carrito">Affogato</p>
-												<span class="precio-producto-carrito">$30</span>
-											</div>
-											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24
-													24" stroke-width="1.5" stroke="currentColor" class="icon-close">
-												<path stroke-linecap="round" stroke-linejoin="round"
-													d="M6 18L18 6M6 6l12 12" />
-											</svg>
-										</div>
-									</div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://chefcuisto.com/files/2019/04/cafe-latte-erable-1140x877.jpg" alt="Café Latte" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Latte</h2>
+                            <p class="price">$15</p>
+                            <p class="tm-product-description">El café latte es una bebida preparada a partir de café expreso y leche caliente. Si te gusta el café y la leche, el café latte es una bebida que debes probar.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-									<div class="cart-total hidden">
-										<h3>Total:</h3>
-										<span class="total-pagar">$200</span>
-									</div>
-									<p class="cart-empty">El carrito está vacío</p>
-								</div>
-							</div>
-						</header>
-						<div class="container-items">
-							<div class="item">
-								<figure>
-									<img src="https://gourmetdemexico.com.mx/wp-content/uploads/2019/04/affogato-cafe.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2> Café Affogato</h2>
-									<p class="price">$30</p>
-									<div>
-										<p style="text-align: justify;" class="tm-product-description">El café
-											Affogato
-											es una bebida tradicional italiana que consiste en una taza de café
-											expreso
-											servida con una bola de helado de vainilla flotando encima.</p>
-										<p style="text-align: justify;">¡Ordena ahora!</p>
-									</div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://media.timeout.com/images/105397612/750/562/image.jpg" alt="Café Milk" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Milk</h2>
+                            <p class="price">$90</p>
+                            <p class="tm-product-description">El café milk es una bebida preparada a partir de café expreso y leche caliente. Si te gusta el café y la leche, el café milk es una bebida que debes probar.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
+                    <div class="item">
+                        <figure>
+                            <img src="http://www.sirup-rezepte.de/pics/upload/kaffee-mocha-fotolia-66666068jpg-1440-900.jpg" alt="Café Mocha" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Mocha</h2>
+                            <p class="price">$90</p>
+                            <p class="tm-product-description">El café mocha es una bebida preparada a partir de café expreso. Si te gusta el café, el chocolate y la leche, el café mocha es una bebida que debes probar.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://http2.mlstatic.com/cafe-sistema-espresso-y-capuchino-sr-ecmp50-automatica-eeu-D_NQ_NP_386115-MCO25157020458_112016-F.jpg" alt="Café Capuchino" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Capuchino</h2>
+                            <p class="price">$50</p>
+                            <p class="tm-product-description">El capuchino es una bebida nacida en Italia, preparada con café expreso y leche montada con vapor para darle cremosidad. Un capuchino se compone de leche y de café expreso.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-							<!--café americano-->
-							<div class="item">
-								<figure>
-									<img src="https://w0.peakpx.com/wallpaper/76/679/HD-wallpaper-coffee-drinks-cup-drink-coffee-beans-cups.jpg"
-										width="5px" height="5px" alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café Americano</h2>
-									<p class="price">$20</p>
-									<div>
-										<p style="text-align: justify;" class="tm-product-description">El
-											café americano es una bebida
-											preparada a
-											partir de café expreso diluido con agua caliente, reduce la
-											cantidad de café
-											y aumenta el volumen de la bebida.
-										<p style="text-align: justify;">¡Ordena ahora!</p>
+                    <div class="item">
+                        <figure>
+                            <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2013/04/cafe-espresso.jpg" alt="Café Expreso" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Expreso</h2>
+                            <p class="price">$90</p>
+                            <p class="tm-product-description">El café expreso es una forma de preparación de café originada en Italia. Se caracteriza por su rápida preparación a una alta presión y por un sabor y textura más concentrados.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
 
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--café latte-->
-							<div class="item">
-								<figure>
-									<img src="https://chefcuisto.com/files/2019/04/cafe-latte-erable-1140x877.jpg"
-										width="5px" height="5px" alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café Late</h2>
-									<p class="price">$15</p>
-									<div style="text-align: justify;">El café latte es una bebida
-										preparada a partir de café expreso
-										y leche
-										caliente,
-										Si te gusta el café y la leche, el café latte es una bebida que
-										debes probar.
-										<p style="text-align: justify;">¡Ordena ahora!</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--café milk-->
-							<div class="item">
-								<figure>
-									<img src="https://media.timeout.com/images/105397612/750/562/image.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café Milk</h2>
-									<p class="price">$90</p>
-									<div style="text-align: justify;">
-										El café milk es una bebida preparada a partir de café expreso y
-										leche caliente,
-										Si te gusta el café y la leche, el café milk es una bebida que
-										debes probar.
-										<p style="text-align: justify;">
-											¡Ordena ahora!
-										</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--café mocha-->
-							<div class="item">
-								<figure>
-									<img src="http://www.sirup-rezepte.de/pics/upload/kaffee-mocha-fotolia-66666068jpg-1440-900.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café Mocha</h2>
-									<p class="price">$90</p>
-									<div style="text-align: justify;">
-										El café mocha es una bebida preparada a partir de café expreso,
-										Si te gusta el café, el chocolate y la leche,
-										el café mocha es una bebida que debes probar.
-										<p style="text-align: justify;">
-											¡Ordena ahora!
-										</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--café mcapuchinnos-->
-							<div class="item">
-								<figure>
-									<img src="https://http2.mlstatic.com/cafe-sistema-espresso-y-capuchino-sr-ecmp50-automatica-eeu-D_NQ_NP_386115-MCO25157020458_112016-F.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2> Café Capuchino</h2>
-									<p class="price">$50</p>
-									<div style="text-align: justify;">
-										El capuchino es una bebida nacida en Italia,
-										preparada con café expreso y leche montada con vapor para darle
-										cremosidad.
-										Un capuchino se compone de leche y de café expreso.
-										<p style="text-align: justify;">
-											¡Ordena ahora!
-										</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--café expreso-->
-							<div class="item">
-								<figure>
-									<img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2013/04/cafe-espresso.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café Expreso</h2>
-									<p class="price">$90</p>
-									<div style="text-align: justify;">
-										El café expreso es una forma de preparación de café originada en
-										Italia.
-										Se caracteriza por su rápida preparación a una alta presión y por
-										un sabor
-										y textura más concentrados.
-										<p style="text-align: justify;">
-											¡Ordena ahora!
-										</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--iced coffe-->
-							<div class="item">
-								<figure>
-									<img src="https://www.lorensworld.com/wp-content/uploads/2015/03/shutterstock_116212006.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café con Hielo</h2>
-									<p class="price">$90</p>
-									<div style="text-align: justify;">
-										El café con hielo es una popular forma de servir el café mezclado
-										con un alimento congelado.
-										Las formas comunes de hacerlo incluyen preparar un café normal y
-										dejarlo enfriar.
-										<p style="text-align: justify;">
-											¡Ordena ahora!
-										</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-							<!--Café negro-->
-							<div class="item">
-								<figure>
-									<img src="https://1.bp.blogspot.com/-gwvyRPLOJRE/Xvr1GMtMvTI/AAAAAAAAHOI/mUfEuT5K3jkvUyIONK-u-X_jJOXANOskACNcBGAsYHQ/s1600/Black-Coffee.jpg"
-										alt="producto" />
-								</figure>
-								<div class="info-product">
-									<h2>Café con Negro</h2>
-									<p class="price">$90</p>
-									<div style="text-align: justify;">
-										Está elaborado con una mezcla de granos de café seleccionados 100%
-										arábica lavada,
-										el tueste perfecto, aroma intenso, sabor inigualable y una
-										tecnología que enaltece
-										la esencia de cada grano.
-										<p style="text-align: justify;">
-											¡Ordena ahora!
-										</p>
-									</div>
-									<div class="popup">
-										<p class="mensaje-enviado"></p>
-									</div>
-									<button class="btn-add-cart">Añadir al carrito</button>
-								</div>
-							</div>
-						</div>
-			</section>
-			<meta charset="UTF-8">
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		</div>
-	</div>
-	<div class="container">
-		<link rel="stylesheet" href="./css/extension.css">
-		<p> <a class="btnp" href="metodoPago.html">PAGAR</a></p>
-	</div>
-	<footer>
-		<div class="tm-black-bg">
-			<div class="container">
-				<div class="row margin-bottom-60">
-					<nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
-						<h3 class="tm-footer-div-title">Menú principal&nbsp;</h3>
-						<ul>
-							<li><a href="index.html" class="active">INICIO&nbsp;</a></li>
-							<li><a href="registrarvista.html">REGISTRATE </a></li>
-							<li><a href="today-special.html">ESPECIAL DE HOY</a></li>
-							<li><a href="menu.html">MENÚ</a></li>
-							<li><a href="contact.html">CONTACTO</a></li>
-						</ul>
-					</nav>
-					<div class="col-lg-5 col-md-5 tm-footer-div">
-						<h3 class="tm-footer-div-title">Sobre Nosotros&nbsp;</h3>
-						<p class="margin-top-15">Somos una cafeteria moderna y acogedora que
-							ofrece una amplia variedad
-							de bebidas y comidas deliciosas. Nuestro equipo está formado por
-							profesionales apasionados
-							por la cafeteria y el servicio al cliente,
-							y trabajamos duro para ofrecerte la mejor experiencia posible en
-							cada visita.
-							&nbsp;</p>
-						<p class="margin-top-15">
-						<p style="text-align: justify;"> En nuestra cafeteria, valoramos la
-							calidad y la frescura de
-							nuestros productos, y trabajamos con proveedores locales y de
-							confianza para asegurarnos de
-							que siempre estamos ofreciendo los mejores ingredientes y bebidas.
-							Además, también nos esforzamos por ofrecer un servicio excepcional
-							a nuestros clientes, y
-							nos encanta recibir feedback y sugerencias para seguir mejorando.
-							Si aún no nos has visitado, te invitamos a conocer nuestra
-							cafeteria y a disfrutar de
-							nuestras deliciosas bebidas y comidas. Estamos deseando recibirte
-							y hacerte sentir como en
-							casa.
-							¡Te esperamos!&nbsp;</p>
-						</p>
-					</div>
-					<div class="col-lg-4 col-md-4 tm-footer-div">
-						<h3 class="tm-footer-div-title">Nuestras Redes Sociales&nbsp;</h3>
-						<p>Sigenos en nuestras redes sociales para estar al tanto de
-							futuras novedades.&nbsp;</p>
-						<div class="tm-social-icons-container">
-							<a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
-							<a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
-							<a href="#" class="tm-social-icon"><i class="fa fa-youtube"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div>
-			<div class="container">
-				<div class="row tm-copyright">
-					<p class="col-lg-12 small copyright-text text-center">Copyright
-						&copy; 2022 Your CoffeBooks</p>
-				</div>
-			</div>
-		</div>
-	</footer> <!-- Footer content-->
-	<!-- JS -->
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<!-- jQuery -->
-	<script type="text/javascript" src="js/templatemo-script.js"></script>
-	<!-- Templatemo Script -->
-	<script type="text/javascript" src="js/menu.js"></script>
-	<script src="./js/index.js"></script>
-	<script type="text/javascript" src="./js/navegacionfija.js"></script>
+                    <div class="item">
+                        <figure>
+                            <img src="https://www.lorensworld.com/wp-content/uploads/2015/03/shutterstock_116212006.jpg" alt="Café con Hielo" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café con Hielo</h2>
+                            <p class="price">$90</p>
+                            <p class="tm-product-description">El café con hielo es una popular forma de servir el café mezclado con un alimento congelado. Las formas comunes de hacerlo incluyen preparar un café normal y dejarlo enfriar.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <figure>
+                            <img src="https://1.bp.blogspot.com/-gwvyRPLOJRE/Xvr1GMtMvTI/AAAAAAAAHOI/mUfEuT5K3jkvUyIONK-u-X_jJOXANOskACNcBGAsYHQ/s1600/Black-Coffee.jpg" alt="Café Negro" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Café Negro</h2>
+                            <p class="price">$90</p>
+                            <p class="tm-product-description">Está elaborado con una mezcla de granos de café seleccionados 100% arábica lavada, el tueste perfecto, aroma intenso, sabor inigualable y una tecnología que enaltece la esencia de cada grano.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="container">
+        <link rel="stylesheet" href="./css/extension.css">
+        <p><a class="btnp" href="metodoPago.html">PAGAR</a></p>
+    </div>
+    <footer>
+        <div class="tm-black-bg">
+            <div class="container">
+                <div class="row margin-bottom-60">
+                    <nav class="col-lg-3 col-md-3 tm-footer-nav tm-footer-div">
+                        <h3 class="tm-footer-div-title">Menú principal&nbsp;</h3>
+                        <ul>
+                            <li><a href="index.html" class="active">INICIO&nbsp;</a></li>
+                            <li><a href="registrarvista.html">REGISTRATE </a></li>
+                            <li><a href="today-special.html">ESPECIAL DE HOY</a></li>
+                            <li><a href="menu.html">MENÚ</a></li>
+                            <li><a href="contact.html">CONTACTO</a></li>
+                        </ul>
+                    </nav>
+                    <div class="col-lg-5 col-md-5 tm-footer-div">
+                        <h3 class="tm-footer-div-title">Sobre Nosotros&nbsp;</h3>
+                        <p class="margin-top-15">Somos una cafeteria moderna y acogedora que
+                            ofrece una amplia variedad
+                            de bebidas y comidas deliciosas. Nuestro equipo está formado por
+                            profesionales apasionados
+                            por la cafeteria y el servicio al cliente,
+                            y trabajamos duro para ofrecerte la mejor experiencia posible en
+                            cada visita.
+                            &nbsp;</p>
+                        <p class="margin-top-15">
+                        <p style="text-align: justify;"> En nuestra cafeteria, valoramos la
+                            calidad y la frescura de
+                            nuestros productos, y trabajamos con proveedores locales y de
+                            confianza para asegurarnos de
+                            que siempre estamos ofreciendo los mejores ingredientes y bebidas.
+                            Además, también nos esforzamos por ofrecer un servicio excepcional
+                            a nuestros clientes, y
+                            nos encanta recibir feedback y sugerencias para seguir mejorando.
+                            Si aún no nos has visitado, te invitamos a conocer nuestra
+                            cafeteria y a disfrutar de
+                            nuestras deliciosas bebidas y comidas. Estamos deseando recibirte
+                            y hacerte sentir como en
+                            casa.
+                            ¡Te esperamos!&nbsp;</p>
+                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 tm-footer-div">
+                        <h3 class="tm-footer-div-title">Nuestras Redes Sociales&nbsp;</h3>
+                        <p>Sigenos en nuestras redes sociales para estar al tanto de
+                            futuras novedades.&nbsp;</p>
+                        <div class="tm-social-icons-container">
+                            <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="tm-social-icon"><i class="fa fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container">
+                <div class="row tm-copyright">
+                    <p class="col-lg-12 small copyright-text text-center">Copyright
+                        &copy; 2022 Your CoffeBooks</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JS -->
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/templatemo-script.js"></script>
+    <script src="./js/index.js" defer></script>
+    <script type="text/javascript" src="./js/navegacionfija.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script type="module" src="js/auth-menu.js"></script>
+
+    <div class="container-icon">
+        <div class="container-cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-cart">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+            </svg>
+            <div class="count-products">
+                <span id="contador-productos">0</span>
+            </div>
+        </div>
+
+        <div class="container-cart-products hidden-cart">
+            <div class="row-product hidden">
+                <div class="cart-product">
+                    <div class="info-cart-product">
+                        <span class="cantidad-producto-carrito">1</span>
+                        <p class="titulo-producto-carrito">Nombre del producto</p>
+                        <span class="precio-producto-carrito">$30</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="cart-total hidden">
+                <h3>Total:</h3>
+                <span class="total-pagar">$200</span>
+            </div>
+            <p class="cart-empty">El carrito está vacío</p>
+        </div>
+    </div>
 </body>
-
 </html>
