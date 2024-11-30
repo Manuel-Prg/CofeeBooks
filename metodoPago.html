@@ -14,12 +14,20 @@
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/templatemo-style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+	 <!-- Add Firebase SDK -->
+	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
+	<div id="cart-summary">
+        <h2>Resumen del Carrito</h2>
+        <div id="cart-items"></div>
+        <div id="cart-total"></div>
+    </div>
 	<div class="contenedor">
 
 		<!-- Tarjeta -->
@@ -119,6 +127,53 @@
 	</form>
 	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 	<script src="js/main.js"></script>
+	<script type="module">
+		        const firebaseConfig = {
+            apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
+            authDomain: "cofeebooks-224bb.firebaseapp.com",
+            projectId: "cofeebooks-224bb",
+            storageBucket: "cofeebooks-224bb.firebasestorage.app",
+            messagingSenderId: "13027139989",
+            appId: "1:13027139989:web:4f6eafc2a8e6b2bfbfd69c",
+            measurementId: "G-KDP62TBVC6"
+        };
+		firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const userId = 'userId'; // Replace with actual user authentication
+
+        function loadCartFromFirestore() {
+            db.collection('carts').doc(userId).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const cart = doc.data().items;
+                    displayCart(cart);
+                }
+            })
+            .catch((error) => {
+                console.error("Error loading cart: ", error);
+            });
+        }
+
+        function displayCart(cart) {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            let total = 0;
+
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `${item.name} - ${item.price}`;
+                cartItems.appendChild(itemElement);
+                total += parseFloat(item.price.replace('$', ''));
+            });
+
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // Load cart when page loads
+        document.addEventListener('DOMContentLoaded', loadCartFromFirestore);
+	</script>
 </body>
 
 </html>

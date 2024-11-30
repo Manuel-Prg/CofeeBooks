@@ -13,6 +13,11 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <link href="./css/nevegacionfija.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <style>
         .container-items {
             display: grid;
@@ -147,6 +152,38 @@
                 <img src="img/light.png" alt="Light" class="light light-2">
                 <img src="img/light.png" alt="Light" class="light light-3">
             </div>
+			<div class="container-icon">
+				<div class="container-cart-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-cart">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+					</svg>
+					<div class="count-products">
+						<span id="contador-productos">0</span>
+					</div>
+				</div>
+		
+				<div class="container-cart-products hidden-cart">
+					<div class="row-product hidden">
+						<div class="cart-product">
+							<div class="info-cart-product">
+								<span class="cantidad-producto-carrito">1</span>
+								<p class="titulo-producto-carrito">Nombre del producto</p>
+								<span class="precio-producto-carrito">$30</span>
+							</div>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+							</svg>
+						</div>
+					</div>
+		
+					<div class="cart-total hidden">
+						<h3>Total:</h3>
+						<span class="total-pagar">$200</span>
+					</div>
+					<p class="cart-empty">El carrito está vacío</p>
+				</div>
+			</div>
+			
             <div class="row tm-welcome-content">
                 <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line"
                         class="tm-header-line">&nbsp;Nuestros Menús&nbsp;&nbsp;<img src="img/header-line.png" alt="Line"
@@ -310,6 +347,12 @@
         <link rel="stylesheet" href="./css/extension.css">
         <p><a class="btnp" href="metodoPago.html">PAGAR</a></p>
     </div>
+
+    <div id="login-container" style="text-align: center; margin: 20px 0;">
+        <p style="margin-bottom: 10px;">Para realizar compras, por favor inicia sesión</p>
+        <a href="registrarvista.html" class="btn-login-redirect" id="login-button">Iniciar sesión</a>
+    </div>
+
     <footer>
         <div class="tm-black-bg">
             <div class="container">
@@ -381,37 +424,47 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
     <script type="module" src="js/auth-menu.js"></script>
+    <script src="./js/firebase-car.js"></script>
+    <script>
+        firebase.auth().onAuthStateChanged((user) => {
+            const loginButton = document.getElementById('login-button');
+            const loginContainer = document.getElementById('login-container');
+            const registerMenuItem = document.getElementById('registerMenuItem');
+            const profileMenuItem = document.getElementById('profileMenuItem');
 
-    <div class="container-icon">
-        <div class="container-cart-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-cart">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-            </svg>
-            <div class="count-products">
-                <span id="contador-productos">0</span>
-            </div>
-        </div>
+            if (user) {
+                loginButton.textContent = 'Cerrar sesión';
+                loginButton.href = '#';
+                loginButton.onclick = () => {
+                    firebase.auth().signOut().then(() => {
+                        cart = [];
+                        updateCartUI();
+                        showNotification('Sesión cerrada exitosamente');
+                    }).catch((error) => {
+                        console.error('Error al cerrar sesión:', error);
+                        showNotification('Error al cerrar sesión', true);
+                    });
+                };
+                registerMenuItem.style.display = 'none';
+                profileMenuItem.style.display = 'block';
+            } else {
+                loginButton.textContent = 'Iniciar sesión';
+                loginButton.href = 'registrarvista.html';
+                loginButton.onclick = null;
+                registerMenuItem.style.display = 'block';
+                profileMenuItem.style.display = 'none';
+            }
+        });
 
-        <div class="container-cart-products hidden-cart">
-            <div class="row-product hidden">
-                <div class="cart-product">
-                    <div class="info-cart-product">
-                        <span class="cantidad-producto-carrito">1</span>
-                        <p class="titulo-producto-carrito">Nombre del producto</p>
-                        <span class="precio-producto-carrito">$30</span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </div>
-            </div>
-
-            <div class="cart-total hidden">
-                <h3>Total:</h3>
-                <span class="total-pagar">$200</span>
-            </div>
-            <p class="cart-empty">El carrito está vacío</p>
-        </div>
-    </div>
+        // Asegurarse de que el carrito se actualice cuando cambie el estado de autenticación
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                loadCartFromFirestore();
+            } else {
+                cart = [];
+                updateCartUI();
+            }
+        });
+    </script>
 </body>
 </html>
