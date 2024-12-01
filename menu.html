@@ -105,6 +105,83 @@
                 grid-template-columns: 1fr;
             }
         }
+        .icon-cart {
+            vertical-align: middle;
+        }
+        .container-cart-products {
+            width: 300px;
+            background-color: #fff;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .cart-product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-cart-product {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .titulo-producto-carrito {
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
+        .precio-producto-carrito {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .cantidad-producto-carrito {
+            border: 1px solid #ccc;
+            padding: 2px 5px;
+            border-radius: 4px;
+            color: #333;
+            font-size: 12px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .total-pagar {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .hidden-cart {
+            display: none;
+        }
+        .row-product.hidden {
+            display: none;
+        }
+        .cart-total.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -137,6 +214,33 @@
                                 <li><a href="cafe-blog.html">Blog de Café</a></li>
                                 <li><a href="contact.html">Contacto</a></li>
                             </ul>
+                            <div class="container-icon">
+                                <div class="container-cart-icon" id="cart-icon">
+                                    <img src="img/shopping-cart_3737151.png" alt="Carrito de compras" class="icon-cart" style="width: 24px; height: 24px;">
+                                    <div class="count-products">
+                                        <span id="contador-productos">0</span>
+                                    </div>
+                                </div>
+                                <div class="container-cart-products hidden-cart">
+                                    <div class="row-product">
+                                        <div class="cart-product">
+                                            <div class="info-cart-product">
+                                                <span class="cantidad-producto-carrito">1</span>
+                                                <p class="titulo-producto-carrito">Nombre del producto</p>
+                                                <span class="precio-producto-carrito">$30</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="cart-total hidden">
+                                        <h3>Total:</h3>
+                                        <span class="total-pagar">$0.00</span>
+                                    </div>
+                                    <p class="cart-empty">El carrito está vacío</p>
+                                </div>
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -152,38 +256,7 @@
                 <img src="img/light.png" alt="Light" class="light light-2">
                 <img src="img/light.png" alt="Light" class="light light-3">
             </div>
-			<div class="container-icon">
-				<div class="container-cart-icon">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-cart">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-					</svg>
-					<div class="count-products">
-						<span id="contador-productos">0</span>
-					</div>
-				</div>
-		
-				<div class="container-cart-products hidden-cart">
-					<div class="row-product hidden">
-						<div class="cart-product">
-							<div class="info-cart-product">
-								<span class="cantidad-producto-carrito">1</span>
-								<p class="titulo-producto-carrito">Nombre del producto</p>
-								<span class="precio-producto-carrito">$30</span>
-							</div>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-							</svg>
-						</div>
-					</div>
-		
-					<div class="cart-total hidden">
-						<h3>Total:</h3>
-						<span class="total-pagar">$200</span>
-					</div>
-					<p class="cart-empty">El carrito está vacío</p>
-				</div>
-			</div>
-			
+            
             <div class="row tm-welcome-content">
                 <h2 class="white-text tm-handwriting-font tm-welcome-header"><img src="img/header-line.png" alt="Line"
                         class="tm-header-line">&nbsp;Nuestros Menús&nbsp;&nbsp;<img src="img/header-line.png" alt="Line"
@@ -416,55 +489,71 @@
             </div>
         </div>
     </footer>
-    <!-- JS -->
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/templatemo-script.js"></script>
-    <script src="./js/index.js" defer></script>
-    <script type="text/javascript" src="./js/navegacionfija.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
-    <script type="module" src="js/auth-menu.js"></script>
-    <script src="./js/firebase-car.js"></script>
-    <script>
-        firebase.auth().onAuthStateChanged((user) => {
-            const loginButton = document.getElementById('login-button');
-            const loginContainer = document.getElementById('login-container');
-            const registerMenuItem = document.getElementById('registerMenuItem');
-            const profileMenuItem = document.getElementById('profileMenuItem');
+ <!-- JS -->
+ <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+ <script type="text/javascript" src="js/templatemo-script.js"></script>
+ <script src="./js/index.js" defer></script>
+ <script type="text/javascript" src="./js/navegacionfija.js"></script>
+ 
+ <!-- Firebase scripts -->
+ <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+ 
+ <!-- Custom scripts -->
+ <script src="js/cart.js"></script>
+ <script src="./js/firebase-car.js"></script>
+ <script type="module" src="js/auth-menu.js"></script>
 
-            if (user) {
-                loginButton.textContent = 'Cerrar sesión';
-                loginButton.href = '#';
-                loginButton.onclick = () => {
-                    firebase.auth().signOut().then(() => {
-                        cart = [];
-                        updateCartUI();
-                        showNotification('Sesión cerrada exitosamente');
-                    }).catch((error) => {
-                        console.error('Error al cerrar sesión:', error);
-                        showNotification('Error al cerrar sesión', true);
-                    });
-                };
-                registerMenuItem.style.display = 'none';
-                profileMenuItem.style.display = 'block';
-            } else {
-                loginButton.textContent = 'Iniciar sesión';
-                loginButton.href = 'registrarvista.html';
-                loginButton.onclick = null;
-                registerMenuItem.style.display = 'block';
-                profileMenuItem.style.display = 'none';
-            }
-        });
+ <script>
+     firebase.auth().onAuthStateChanged((user) => {
+         const loginButton = document.getElementById('login-button');
+         const loginContainer = document.getElementById('login-container');
+         const registerMenuItem = document.getElementById('registerMenuItem');
+         const profileMenuItem = document.getElementById('profileMenuItem');
 
-        // Asegurarse de que el carrito se actualice cuando cambie el estado de autenticación
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                loadCartFromFirestore();
-            } else {
-                cart = [];
-                updateCartUI();
-            }
-        });
-    </script>
+         if (user) {
+             loginButton.textContent = 'Cerrar sesión';
+             loginButton.href = '#';
+             loginButton.onclick = () => {
+                 firebase.auth().signOut().then(() => {
+                     CarritoCompras.items = [];
+                     updateCartUI();
+                     showNotification('Sesión cerrada exitosamente');
+                 }).catch((error) => {
+                     console.error('Error al cerrar sesión:', error);
+                     showNotification('Error al cerrar sesión', true);
+                 });
+             };
+             registerMenuItem.style.display = 'none';
+             profileMenuItem.style.display = 'block';
+         } else {
+             loginButton.textContent = 'Iniciar sesión';
+             loginButton.href = 'registrarvista.html';
+             loginButton.onclick = null;
+             registerMenuItem.style.display = 'block';
+             profileMenuItem.style.display = 'none';
+         }
+     });
+
+     document.addEventListener('DOMContentLoaded', () => {
+         const cartIcon = document.getElementById('cart-icon');
+         const cartProducts = document.querySelector('.container-cart-products');
+
+         if (cartIcon && cartProducts) {
+             cartIcon.addEventListener('click', () => {
+                 cartProducts.classList.toggle('hidden-cart');
+             });
+
+             // Close the cart when clicking outside of it
+             document.addEventListener('click', e => {
+                 if (!cartIcon.contains(e.target) && !cartProducts.contains(e.target)) {
+                     cartProducts.classList.add('hidden-cart');
+                 }
+             });
+         }
+     });
+ </script>
+<script src="js/cart.js"></script>
 </body>
 </html>

@@ -13,21 +13,39 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/templatemo-style.css" rel="stylesheet">
+	<link href="./css/metodoPago.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 	 <!-- Add Firebase SDK -->
 	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
+<style>
+	body{
+		background: url('img/fondo-login.jpg') no-repeat center center fixed;
+		background: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+
+</style>
 
 <body>
-	<div id="cart-summary">
-        <h2>Resumen del Carrito</h2>
-        <div id="cart-items"></div>
-        <div id="cart-total"></div>
-    </div>
+	<div class="cart-summary">
+		<h2>Resumen del Carrito</h2>
+		<div id="cart-items" class="cart-items">
+			<!-- Cart items will be inserted here -->
+		</div>
+		<div id="cart-total" class="cart-total">
+			<!-- Total will be inserted here -->
+		</div>
+	</div>
+
 	<div class="contenedor">
 
 		<!-- Tarjeta -->
@@ -126,7 +144,9 @@
 	</div>
 	</form>
 	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+	<script src="js/firebase-config.js"></script>
 	<script src="js/main.js"></script>
+	<script src="./js/metodoPago.js"></script>
 	<script type="module">
 		        const firebaseConfig = {
             apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
