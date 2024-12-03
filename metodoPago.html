@@ -1,199 +1,183 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CoffeeBooks - PAGAR</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CoffeeBooks - PAGAR</title>
 
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet'
-		type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/templatemo-style.css" rel="stylesheet">
-	<link href="./css/metodoPago.css" rel="stylesheet">
-	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-	 <!-- Add Firebase SDK -->
-	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-	 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link href="./css/metodoPago.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/estilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        body {
+            background: url('img/fondo-login.jpg') no-repeat center center fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+        }
+        .payment-animation {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .payment-animation__content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .payment-animation__spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-<style>
-	body{
-		background: url('img/fondo-login.jpg') no-repeat center center fixed;
-		background: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-	}
-
-</style>
 
 <body>
-	<div class="cart-summary">
-		<h2>Resumen del Carrito</h2>
-		<div id="cart-items" class="cart-items">
-			<!-- Cart items will be inserted here -->
-		</div>
-		<div id="cart-total" class="cart-total">
-			<!-- Total will be inserted here -->
-		</div>
-	</div>
+    <div class="cart-summary">
+        <h2>Resumen del Carrito</h2>
+        <div id="cart-items" class="cart-items">
+            <!-- Los elementos del carrito se insertarán aquí -->
+        </div>
+        <div id="cart-total" class="cart-total">
+            <!-- El total se insertará aquí -->
+        </div>
+    </div>
 
-	<div class="contenedor">
+    <div class="contenedor">
+        <!-- Tarjeta -->
+        <section class="tarjeta" id="tarjeta">
+            <div class="delantera">
+                <div class="logo-marca" id="logo-marca">
+                    <!-- <img src="img/logos/visa.png" alt=""> -->
+                </div>
+                <img src="img/chip-tarjeta.png" class="chip" alt="">
+                <div class="datos">
+                    <div class="grupo" id="numero">
+                        <p class="label">Número Tarjeta</p>
+                        <p class="numero">#### #### #### ####</p>
+                    </div>
+                    <div class="flexbox">
+                        <div class="grupo" id="nombre">
+                            <p class="label">Nombre Tarjeta</p>
+                            <p class="nombre"></p>
+                        </div>
 
-		<!-- Tarjeta -->
-		<section class="tarjeta" id="tarjeta">
-			<div class="delantera">
-				<div class="logo-marca" id="logo-marca">
-					<!-- <img src="img/logos/visa.png" alt=""> -->
-				</div>
-				<img src="img/chip-tarjeta.png" class="chip" alt="">
-				<div class="datos">
-					<div class="grupo" id="numero">
-						<p class="label">Número Tarjeta</p>
-						<p class="numero">#### #### #### ####</p>
-					</div>
-					<div class="flexbox">
-						<div class="grupo" id="nombre">
-							<p class="label">Nombre Tarjeta</p>
-							<p class="nombre"></p>
-						</div>
+                        <div class="grupo" id="expiracion">
+                            <p class="label">Expiración</p>
+                            <p class="expiracion"><span class="mes">MM</span> / <span class="year">AA</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-						<div class="grupo" id="expiracion">
-							<p class="label">Expiración</p>
-							<p class="expiracion"><span class="mes">MM</span> / <span class="year">AA</span></p>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="trasera">
+                <div class="barra-magnetica"></div>
+                <div class="datos">
+                    <div class="grupo" id="firma">
+                        <p class="label">Firma</p>
+                        <div class="firma">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="grupo" id="ccv">
+                        <p class="label">CCV</p>
+                        <p class="ccv"></p>
+                    </div>
+                </div>
+                <p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem, voluptates illo.</p>
+                <a href="#" class="link-banco">www.tubanco.com</a>
+            </div>
+        </section>
 
-			<div class="trasera">
-				<div class="barra-magnetica"></div>
-				<div class="datos">
-					<div class="grupo" id="firma">
-						<p class="label">Firma</p>
-						<div class="firma">
-							<p></p>
-						</div>
-					</div>
-					<div class="grupo" id="ccv">
-						<p class="label">CCV</p>
-						<p class="ccv"></p>
-					</div>
-				</div>
-				<p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem,
-					voluptates illo.</p>
-				<a href="#" class="link-banco">www.tubanco.com</a>
-			</div>
-		</section>
+        <!-- Contenedor Botón Abrir Formulario -->
+        <div class="contenedor-btn">
+            <button class="btn-abrir-formulario" id="btn-abrir-formulario">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
 
-		<!-- Contenedor Boton Abrir Formulario -->
-		<div class="contenedor-btn">
-			<button class="btn-abrir-formulario" id="btn-abrir-formulario">
-				<i class="fas fa-plus"></i>
-			</button>
-		</div>
+        <!-- Formulario -->
+        <form action="" id="formulario-tarjeta" class="formulario-tarjeta">
+            <div class="grupo">
+                <label for="inputNumero">Número Tarjeta</label>
+                <input type="text" id="inputNumero" maxlength="19" autocomplete="off">
+            </div>
+            <div class="grupo">
+                <label for="inputNombre">Nombre</label>
+                <input type="text" id="inputNombre" maxlength="19" autocomplete="off">
+            </div>
+            <div class="flexbox">
+                <div class="grupo expira">
+                    <label for="selectMes">Expiración</label>
+                    <div class="flexbox">
+                        <div class="grupo-select">
+                            <select name="mes" id="selectMes">
+                                <option disabled selected>Mes</option>
+                            </select>
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                        <div class="grupo-select">
+                            <select name="year" id="selectYear">
+                                <option disabled selected>Año</option>
+                            </select>
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
 
-		<!-- Formulario -->
-		<form action="" id="formulario-tarjeta" class="formulario-tarjeta">
-			<div class="grupo">
-				<label for="inputNumero">Número Tarjeta</label>
-				<input type="text" id="inputNumero" maxlength="19" autocomplete="off">
-			</div>
-			<div class="grupo">
-				<label for="inputNombre">Nombre</label>
-				<input type="text" id="inputNombre" maxlength="19" autocomplete="off">
-			</div>
-			<div class="flexbox">
-				<div class="grupo expira">
-					<label for="selectMes">Expiracion</label>
-					<div class="flexbox">
-						<div class="grupo-select">
-							<select name="mes" id="selectMes">
-								<option disabled selected>Mes</option>
-							</select>
-							<i class="fas fa-angle-down"></i>
-						</div>
-						<div class="grupo-select">
-							<select name="year" id="selectYear">
-								<option disabled selected>Año</option>
-							</select>
-							<i class="fas fa-angle-down"></i>
-						</div>
-					</div>
-				</div>
+                <div class="grupo ccv">
+                    <label for="inputCCV">CCV</label>
+                    <input type="text" id="inputCCV" maxlength="3">
+                </div>
+            </div>
+            <button type="submit" class="btn-enviar">Enviar</button>
+        </form>
+    </div>
 
-				<div class="grupo ccv">
-					<label for="inputCCV">CCV</label>
-					<input type="text" id="inputCCV" maxlength="3">
-				</div>
-			</div>
-			<button type="submit" class="btn-enviar">Enviar</button>
+    <div>
+        <link rel="stylesheet" href="./css/extension.css">
+        <p><a class="btnp" href="menu.html">Regresar</a></p>
+    </div>
 
-	</div>
-	<div>
-		<link rel="stylesheet" href="./css/extension.css">
-		<p><a class="btnp" href="menu.html">Regresar</a></p>
-	</div>
-	</form>
-	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-	<script src="js/firebase-config.js"></script>
-	<script src="js/main.js"></script>
-	<script src="./js/metodoPago.js"></script>
-	<script type="module">
-		        const firebaseConfig = {
-            apiKey: "AIzaSyBQm02Pm7cGb1U63diPdC9s9Z9hq6tQ6DQ",
-            authDomain: "cofeebooks-224bb.firebaseapp.com",
-            projectId: "cofeebooks-224bb",
-            storageBucket: "cofeebooks-224bb.firebasestorage.app",
-            messagingSenderId: "13027139989",
-            appId: "1:13027139989:web:4f6eafc2a8e6b2bfbfd69c",
-            measurementId: "G-KDP62TBVC6"
-        };
-		firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+    <div class="payment-animation">
+        <div class="payment-animation__content">
+            <div class="payment-animation__spinner"></div>
+            <p>Procesando pago...</p>
+        </div>
+    </div>
 
-        const userId = 'userId'; // Replace with actual user authentication
-
-        function loadCartFromFirestore() {
-            db.collection('carts').doc(userId).get()
-            .then((doc) => {
-                if (doc.exists) {
-                    const cart = doc.data().items;
-                    displayCart(cart);
-                }
-            })
-            .catch((error) => {
-                console.error("Error loading cart: ", error);
-            });
-        }
-
-        function displayCart(cart) {
-            const cartItems = document.getElementById('cart-items');
-            const cartTotal = document.getElementById('cart-total');
-            let total = 0;
-
-            cartItems.innerHTML = '';
-            cart.forEach(item => {
-                const itemElement = document.createElement('div');
-                itemElement.textContent = `${item.name} - ${item.price}`;
-                cartItems.appendChild(itemElement);
-                total += parseFloat(item.price.replace('$', ''));
-            });
-
-            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-        }
-
-        // Load cart when page loads
-        document.addEventListener('DOMContentLoaded', loadCartFromFirestore);
-	</script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="./js/metodoPago.js"></script>
 </body>
-
 </html>
