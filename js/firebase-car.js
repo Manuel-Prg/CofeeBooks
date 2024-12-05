@@ -70,7 +70,7 @@ async function removeFromCart(index) {
         updateCartUI();
     } else {
         console.log("No hay usuario conectado. No se puede eliminar del carrito.");
-        // Aquí podrías mostrar un mensaje al usuario o redirigir a la página de inicio de sesión
+        showNotification('Por favor, inicia sesión para eliminar productos del carrito', true);
     }
 }
 
@@ -116,12 +116,17 @@ async function loadCartFromFirestore() {
 
 function updateCartUI() {
     const cartContainer = document.querySelector('.container-cart-products');
-    const cartItems = document.querySelector('.cart-product');
+    const rowProduct = document.querySelector('.row-product');
     const totalElement = document.querySelector('.total-pagar');
     const countElement = document.querySelector('#contador-productos');
     const emptyCartMessage = document.querySelector('.cart-empty');
 
-    cartItems.innerHTML = '';
+    if (!cartContainer || !rowProduct || !totalElement || !countElement || !emptyCartMessage) {
+        console.error('No se encontraron todos los elementos necesarios para actualizar el carrito');
+        return;
+    }
+
+    rowProduct.innerHTML = '';
     let total = 0;
 
     if (cart.length === 0) {
@@ -140,11 +145,11 @@ function updateCartUI() {
                     <p class="titulo-producto-carrito">${item.name}</p>
                     <span class="precio-producto-carrito">${item.price}</span>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close" onclick="removeFromCart(${index})">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close" data-index="${index}">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             `;
-            cartItems.appendChild(itemElement);
+            rowProduct.appendChild(itemElement);
             total += parseFloat(item.price.replace('$', ''));
         });
     }
@@ -154,18 +159,25 @@ function updateCartUI() {
 }
 
 // Load cart when page loads
-document.addEventListener('DOMContentLoaded', loadCartFromFirestore);
-
-// Update add to cart buttons
 document.addEventListener('DOMContentLoaded', () => {
+    loadCartFromFirestore();
+
+    // Update add to cart buttons
     document.querySelectorAll('.btn-add-cart').forEach((button) => {
         button.addEventListener('click', () => {
             const product = {
-                name: button.parentElement.querySelector('h2').textContent,
-                price: button.parentElement.querySelector('.price').textContent
+                name: button.closest('.item').querySelector('h2').textContent,
+                price: button.closest('.item').querySelector('.price').textContent
             };
             addToCart(product);
         });
     });
-});
 
+    // Event delegation for remove from cart buttons
+    document.querySelector('.container-cart-products').addEventListener('click', (e) => {
+        if (e.target.closest('.icon-close')) {
+            const index = e.target.closest('.icon-close').dataset.index;
+            removeFromCart(parseInt(index));
+        }
+    });
+});

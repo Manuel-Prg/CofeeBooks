@@ -21,7 +21,7 @@
     <style>
         .container-items {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 20px;
         }
@@ -41,7 +41,7 @@
         .item figure {
             margin: 0;
             padding: 0;
-            height: 200px;
+            height: 150px;
             overflow: hidden;
         }
 
@@ -57,26 +57,24 @@
         }
 
         .info-product {
-            padding: 15px;
+            padding: 10px;
         }
 
         .info-product h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
+            font-size: 16px;
+            margin-bottom: 5px;
             color: #333;
         }
 
         .price {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #c7a17a;
             margin-bottom: 10px;
         }
 
         .tm-product-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
+            display: none;
         }
 
         .btn-add-cart {
@@ -96,7 +94,22 @@
 
         @media (max-width: 768px) {
             .container-items {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .container-cart-icon {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1001;
+            }
+
+            .container-cart-products {
+                position: fixed;
+                top: 60px;
+                right: 10px;
+                max-width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
             }
         }
 
@@ -182,6 +195,18 @@
         .cart-total.hidden {
             display: none;
         }
+        .btn-pagar {
+            background-color: #c7a17a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: block;
+            margin: 20px auto;
+            width: fit-content;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -209,14 +234,13 @@
                                 <li><a href="index.html">INICIO</a></li>
                                 <li id="registerMenuItem"><a href="registrarvista.html">Registrate</a></li>
                                 <li id="profileMenuItem" style="display: none;"><a href="perfil-usuario.html">Perfil</a></li>
-                                <li><a href="today-special.html">Especial de Hoy</a></li>
-                                <li><a href="menu.html">Menú</a></li>
-                                <li><a href="cafe-blog.html">Blog de Café</a></li>
+                                <li><a href="today-special.html">Especial</a></li>
+                                <li><a href="cafe-blog.html">Blog </a></li>
                                 <li><a href="contact.html">Contacto</a></li>
                             </ul>
                             <div class="container-icon">
                                 <div class="container-cart-icon" id="cart-icon">
-                                    <img src="img/shopping-cart_3737151.png" alt="Carrito de compras" class="icon-cart" style="width: 24px; height: 24px;">
+                                    <img src="img/carro-de-la-compra-icon.png" alt="Carrito de compras" class="icon-cart" style="width: 24px; height: 24px;">
                                     <div class="count-products">
                                         <span id="contador-productos">0</span>
                                     </div>
@@ -238,6 +262,7 @@
                                         <h3>Total:</h3>
                                         <span class="total-pagar">$0.00</span>
                                     </div>
+                                    <a href="metodoPago.html" class="btn-pagar">Pagar</a>
                                     <p class="cart-empty">El carrito está vacío</p>
                                 </div>
                             </div>
@@ -312,7 +337,6 @@
                         <div class="info-product">
                             <h2>Café Affogato</h2>
                             <p class="price">$30</p>
-                            <p class="tm-product-description">El café Affogato es una bebida tradicional italiana que consiste en una taza de café expreso servida con una bola de helado de vainilla flotando encima.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -324,7 +348,6 @@
                         <div class="info-product">
                             <h2>Café Americano</h2>
                             <p class="price">$20</p>
-                            <p class="tm-product-description">El café americano es una bebida preparada a partir de café expreso diluido con agua caliente, reduce la cantidad de café y aumenta el volumen de la bebida.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -336,7 +359,6 @@
                         <div class="info-product">
                             <h2>Café Latte</h2>
                             <p class="price">$15</p>
-                            <p class="tm-product-description">El café latte es una bebida preparada a partir de café expreso y leche caliente. Si te gusta el café y la leche, el café latte es una bebida que debes probar.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -348,19 +370,17 @@
                         <div class="info-product">
                             <h2>Café Milk</h2>
                             <p class="price">$90</p>
-                            <p class="tm-product-description">El café milk es una bebida preparada a partir de café expreso y leche caliente. Si te gusta el café y la leche, el café milk es una bebida que debes probar.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
 
                     <div class="item">
                         <figure>
-                            <img src="http://www.sirup-rezepte.de/pics/upload/kaffee-mocha-fotolia-66666068jpg-1440-900.jpg" alt="Café Mocha" />
+                            <img src="https://th.bing.com/th/id/R.4f0f2680a69acb2f8f1ec39ca8628d1a?rik=CAdUBg9J4xKYzg&pid=ImgRaw&r=0" alt="Café Mocha" />
                         </figure>
                         <div class="info-product">
                             <h2>Café Mocha</h2>
                             <p class="price">$90</p>
-                            <p class="tm-product-description">El café mocha es una bebida preparada a partir de café expreso. Si te gusta el café, el chocolate y la leche, el café mocha es una bebida que debes probar.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -372,7 +392,6 @@
                         <div class="info-product">
                             <h2>Café Capuchino</h2>
                             <p class="price">$50</p>
-                            <p class="tm-product-description">El capuchino es una bebida nacida en Italia, preparada con café expreso y leche montada con vapor para darle cremosidad. Un capuchino se compone de leche y de café expreso.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -384,7 +403,6 @@
                         <div class="info-product">
                             <h2>Café Expreso</h2>
                             <p class="price">$90</p>
-                            <p class="tm-product-description">El café expreso es una forma de preparación de café originada en Italia. Se caracteriza por su rápida preparación a una alta presión y por un sabor y textura más concentrados.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -396,7 +414,6 @@
                         <div class="info-product">
                             <h2>Café con Hielo</h2>
                             <p class="price">$90</p>
-                            <p class="tm-product-description">El café con hielo es una popular forma de servir el café mezclado con un alimento congelado. Las formas comunes de hacerlo incluyen preparar un café normal y dejarlo enfriar.</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -408,7 +425,36 @@
                         <div class="info-product">
                             <h2>Café Negro</h2>
                             <p class="price">$90</p>
-                            <p class="tm-product-description">Está elaborado con una mezcla de granos de café seleccionados 100% arábica lavada, el tueste perfecto, aroma intenso, sabor inigualable y una tecnología que enaltece la esencia de cada grano.</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://www.mdzol.com/u/fotografias/m/2020/11/23/f1280x720-984576_1116251_5050.jpg" alt="Café Negro" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Frappe de Café</h2>
+                            <p class="price">$60</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://th.bing.com/th/id/OIP.tySPiLQhmpHaivaNvHraXwHaHa?rs=1&pid=ImgDetMain" alt="Café Negro" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Frappe de Vainilla</h2>
+                            <p class="price">$65</p>
+                            <button class="btn-add-cart">Añadir al carrito</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <figure>
+                            <img src="https://ciudadtrendy.mx/wp-content/uploads/2021/06/como-hacer-frappe-de-oreo-receta-facil.jpg" alt="Café Negro" />
+                        </figure>
+                        <div class="info-product">
+                            <h2>Frappe de Oreo</h2>
+                            <p class="price">$65</p>
                             <button class="btn-add-cart">Añadir al carrito</button>
                         </div>
                     </div>
@@ -416,16 +462,6 @@
             </section>
         </div>
     </div>
-    <div class="container">
-        <link rel="stylesheet" href="./css/extension.css">
-        <p><a class="btnp" href="metodoPago.html">PAGAR</a></p>
-    </div>
-
-    <div id="login-container" style="text-align: center; margin: 20px 0;">
-        <p style="margin-bottom: 10px;">Para realizar compras, por favor inicia sesión</p>
-        <a href="registrarvista.html" class="btn-login-redirect" id="login-button">Iniciar sesión</a>
-    </div>
-
     <footer>
         <div class="tm-black-bg">
             <div class="container">
@@ -435,7 +471,7 @@
                         <ul>
                             <li><a href="index.html" class="active">INICIO&nbsp;</a></li>
                             <li><a href="registrarvista.html">REGISTRATE </a></li>
-                            <li><a href="today-special.html">ESPECIAL DE HOY</a></li>
+                            <li><a href="today-special.html">ESPECIAL</a></li>
                             <li><a href="menu.html">MENÚ</a></li>
                             <li><a href="contact.html">CONTACTO</a></li>
                         </ul>

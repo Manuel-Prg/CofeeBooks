@@ -72,30 +72,17 @@ p{
     }
 }
 
+.btn-cart {
+    background-color: #c7a17a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.btn-cart:hover {
+    background-color: #a1887f;
+}

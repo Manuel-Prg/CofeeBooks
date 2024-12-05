@@ -297,3 +297,21 @@ nav {
         text-align: center;
     }
 }
+
+.btn-pagar {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #c7a17a;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pagar:hover {
+    background-color: #a1887f;
+}
